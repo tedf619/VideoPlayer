@@ -29,7 +29,6 @@
     private void InitializeComponent()
     {
       components = new System.ComponentModel.Container();
-      panelVolume = new Panel();
       trackBarVolume = new TrackBar();
       label2 = new Label();
       panelControls = new Panel();
@@ -47,7 +46,6 @@
       toolTip = new ToolTip(components);
       panelNowPlaying = new Panel();
       labelNowPlaying = new Label();
-      panelVolume.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
       panelControls.SuspendLayout();
       panelSeeker.SuspendLayout();
@@ -55,24 +53,14 @@
       panelNowPlaying.SuspendLayout();
       SuspendLayout();
       // 
-      // panelVolume
-      // 
-      panelVolume.BackColor = Color.FromArgb(30, 30, 30);
-      panelVolume.Controls.Add(trackBarVolume);
-      panelVolume.Controls.Add(label2);
-      panelVolume.Dock = DockStyle.Bottom;
-      panelVolume.Location = new Point(0, 480);
-      panelVolume.Name = "panelVolume";
-      panelVolume.Size = new Size(791, 45);
-      panelVolume.TabIndex = 2;
-      // 
       // trackBarVolume
       // 
-      trackBarVolume.Location = new Point(65, 10);
+      trackBarVolume.Location = new Point(585, 21);
       trackBarVolume.Maximum = 100;
       trackBarVolume.Name = "trackBarVolume";
-      trackBarVolume.Size = new Size(723, 45);
+      trackBarVolume.Size = new Size(189, 45);
       trackBarVolume.TabIndex = 1;
+      trackBarVolume.TickStyle = TickStyle.None;
       toolTip.SetToolTip(trackBarVolume, "Audio volume");
       trackBarVolume.Value = 40;
       trackBarVolume.ValueChanged += TrackBarVolume_ValueChanged;
@@ -81,7 +69,7 @@
       // 
       label2.AutoSize = true;
       label2.ForeColor = Color.White;
-      label2.Location = new Point(12, 10);
+      label2.Location = new Point(537, 22);
       label2.Name = "label2";
       label2.Size = new Size(47, 15);
       label2.TabIndex = 0;
@@ -90,15 +78,17 @@
       // panelControls
       // 
       panelControls.BackColor = Color.FromArgb(30, 30, 30);
+      panelControls.Controls.Add(label2);
+      panelControls.Controls.Add(trackBarVolume);
       panelControls.Controls.Add(buttonSkipForward);
       panelControls.Controls.Add(buttonStop);
       panelControls.Controls.Add(buttonPlayPause);
       panelControls.Controls.Add(buttonSkipBack);
       panelControls.Controls.Add(buttonOpenFiles);
       panelControls.Dock = DockStyle.Bottom;
-      panelControls.Location = new Point(0, 434);
+      panelControls.Location = new Point(0, 462);
       panelControls.Name = "panelControls";
-      panelControls.Size = new Size(791, 46);
+      panelControls.Size = new Size(791, 63);
       panelControls.TabIndex = 3;
       // 
       // buttonSkipForward
@@ -108,7 +98,7 @@
       buttonSkipForward.FlatStyle = FlatStyle.Flat;
       buttonSkipForward.Font = new Font("Segoe UI", 14.25F);
       buttonSkipForward.ForeColor = Color.Cyan;
-      buttonSkipForward.Location = new Point(344, 4);
+      buttonSkipForward.Location = new Point(344, 13);
       buttonSkipForward.Name = "buttonSkipForward";
       buttonSkipForward.Size = new Size(57, 35);
       buttonSkipForward.TabIndex = 6;
@@ -124,7 +114,7 @@
       buttonStop.FlatStyle = FlatStyle.Flat;
       buttonStop.Font = new Font("Segoe UI", 14.25F);
       buttonStop.ForeColor = Color.Cyan;
-      buttonStop.Location = new Point(283, 4);
+      buttonStop.Location = new Point(283, 13);
       buttonStop.Name = "buttonStop";
       buttonStop.Size = new Size(57, 35);
       buttonStop.TabIndex = 5;
@@ -140,7 +130,7 @@
       buttonPlayPause.FlatStyle = FlatStyle.Flat;
       buttonPlayPause.Font = new Font("Segoe UI", 14.25F);
       buttonPlayPause.ForeColor = Color.Cyan;
-      buttonPlayPause.Location = new Point(221, 3);
+      buttonPlayPause.Location = new Point(221, 12);
       buttonPlayPause.Name = "buttonPlayPause";
       buttonPlayPause.Size = new Size(57, 35);
       buttonPlayPause.TabIndex = 4;
@@ -156,7 +146,7 @@
       buttonSkipBack.FlatStyle = FlatStyle.Flat;
       buttonSkipBack.Font = new Font("Segoe UI", 14.25F);
       buttonSkipBack.ForeColor = Color.Cyan;
-      buttonSkipBack.Location = new Point(159, 3);
+      buttonSkipBack.Location = new Point(159, 12);
       buttonSkipBack.Name = "buttonSkipBack";
       buttonSkipBack.Size = new Size(57, 35);
       buttonSkipBack.TabIndex = 1;
@@ -171,7 +161,7 @@
       buttonOpenFiles.FlatAppearance.BorderColor = Color.Gray;
       buttonOpenFiles.FlatStyle = FlatStyle.Flat;
       buttonOpenFiles.ForeColor = Color.White;
-      buttonOpenFiles.Location = new Point(11, 3);
+      buttonOpenFiles.Location = new Point(11, 12);
       buttonOpenFiles.Name = "buttonOpenFiles";
       buttonOpenFiles.Size = new Size(106, 35);
       buttonOpenFiles.TabIndex = 0;
@@ -186,7 +176,7 @@
       panelSeeker.Controls.Add(labelTime);
       panelSeeker.Controls.Add(trackBarSeek);
       panelSeeker.Dock = DockStyle.Bottom;
-      panelSeeker.Location = new Point(0, 384);
+      panelSeeker.Location = new Point(0, 412);
       panelSeeker.Name = "panelSeeker";
       panelSeeker.Size = new Size(791, 50);
       panelSeeker.TabIndex = 5;
@@ -195,18 +185,19 @@
       // 
       labelTime.AutoSize = true;
       labelTime.ForeColor = Color.White;
-      labelTime.Location = new Point(715, 17);
+      labelTime.Location = new Point(677, 15);
       labelTime.Name = "labelTime";
-      labelTime.Size = new Size(72, 15);
+      labelTime.Size = new Size(90, 15);
       labelTime.TabIndex = 3;
-      labelTime.Text = "00:00 / 00:00";
+      labelTime.Text = "0:00:00 / 0:00:00";
       // 
       // trackBarSeek
       // 
       trackBarSeek.Location = new Point(12, 15);
       trackBarSeek.Name = "trackBarSeek";
-      trackBarSeek.Size = new Size(701, 45);
+      trackBarSeek.Size = new Size(659, 45);
       trackBarSeek.TabIndex = 2;
+      trackBarSeek.TickStyle = TickStyle.None;
       toolTip.SetToolTip(trackBarSeek, "Video playing location");
       trackBarSeek.MouseDown += TrackBarSeek_MouseDown;
       trackBarSeek.MouseUp += TrackBarSeek_MouseUp;
@@ -217,7 +208,7 @@
       panelVideo.Dock = DockStyle.Fill;
       panelVideo.Location = new Point(0, 0);
       panelVideo.Name = "panelVideo";
-      panelVideo.Size = new Size(791, 384);
+      panelVideo.Size = new Size(791, 412);
       panelVideo.TabIndex = 6;
       // 
       // timerPosition
@@ -261,15 +252,13 @@
       Controls.Add(panelVideo);
       Controls.Add(panelSeeker);
       Controls.Add(panelControls);
-      Controls.Add(panelVolume);
       MinimumSize = new Size(400, 300);
       Name = "FormMain";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Video Player";
-      panelVolume.ResumeLayout(false);
-      panelVolume.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
       panelControls.ResumeLayout(false);
+      panelControls.PerformLayout();
       panelSeeker.ResumeLayout(false);
       panelSeeker.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)trackBarSeek).EndInit();
@@ -278,7 +267,6 @@
     }
 
     #endregion
-    private Panel panelVolume;
     private Panel panelControls;
     private TrackBar trackBarVolume;
     private Label label2;

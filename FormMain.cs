@@ -5,7 +5,8 @@
     readonly System.Windows.Forms.Integration.ElementHost elementHostVideo = new();
     readonly System.Windows.Media.MediaPlayer player = new();
     readonly System.Windows.Media.VideoDrawing videoDrawing = new();
-    bool isPlaying, isDraggingSeek, isMediaLoaded;
+    bool isPlaying, isDraggingSeek;
+    TimeSpan duration;
 
     public FormMain()
     {
@@ -42,7 +43,6 @@
     {
       if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
-      isMediaLoaded = false;
       player.Open(new Uri(openFileDialog.FileName));
       labelNowPlaying.Text = System.IO.Path.GetFileNameWithoutExtension(openFileDialog.FileName);
 
@@ -61,7 +61,7 @@
 
     void ButtonPlayPause_Click(object? sender, EventArgs e)
     {
-      if (!isMediaLoaded) return;
+      if (player.Source == null) return;
       UpdatePlayPauseState(!isPlaying);
     }
 
@@ -89,10 +89,10 @@
 
     void Player_MediaOpened(object? sender, EventArgs e)
     {
-      isMediaLoaded = true;
+      duration = player.NaturalDuration.HasTimeSpan ? player.NaturalDuration.TimeSpan : TimeSpan.Zero;
 
       if (player.NaturalDuration.HasTimeSpan)
-        trackBarSeek.Maximum = Math.Max(1, (int)player.NaturalDuration.TimeSpan.TotalSeconds);
+        trackBarSeek.Maximum = Math.Max(1, (int)duration.TotalSeconds);
 
       // scale image to maintain proper aspect ratio
       int width = player.NaturalVideoWidth > 0 ? player.NaturalVideoWidth : 640;
@@ -123,22 +123,22 @@
     void TrackBarSeek_MouseUp(object? sender, MouseEventArgs e)
     {
       isDraggingSeek = false;
-      if (!isMediaLoaded) return;
+      if (player.Source == null) return;
 
       player.Position = TimeSpan.FromSeconds(trackBarSeek.Value);
       UpdateTrackBarSeekPosition();
     }
 
+ 
     void TimerPosition_Tick(object? sender, EventArgs e)
     {
-      if (isDraggingSeek || !isMediaLoaded) return;
+      if (isDraggingSeek || player.Source == null) return;
       UpdateTrackBarSeekPosition();
     }
 
     void UpdateTrackBarSeekPosition()
     {
       var position = player.Position;
-      var duration = player.NaturalDuration.HasTimeSpan ? player.NaturalDuration.TimeSpan : TimeSpan.Zero;
 
       int seconds = (int)position.TotalSeconds;
       if (seconds <= trackBarSeek.Maximum)
@@ -147,7 +147,7 @@
       labelTime.Text = $"{FormatTime(position)} / {FormatTime(duration)}";
     }
 
-    string FormatTime(TimeSpan time) => time.ToString(@"mm\:ss");
+    string FormatTime(TimeSpan time) => time.ToString(@"h\:mm\:ss");
 
     void UpdatePlayPauseState(bool isNowPlaying)
     {
