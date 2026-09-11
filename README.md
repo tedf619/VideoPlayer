@@ -3,7 +3,7 @@
 
 A super-simple one-class Windows Forms desktop app for people getting started with video rendering.
 
-<img width="793" height="557" alt="image" src="https://github.com/user-attachments/assets/a243d3d0-30d6-4600-90d4-3d2d6771fe9c" />
+<img width="793" height="557" alt="image" src="https://github.com/user-attachments/assets/37408d3d-a3c3-4dd9-b64a-d1395afdd43c" />
 
 *Figure 1 - VideoPlayer in action.*
 
@@ -25,7 +25,7 @@ in a Windows Forms app, you need to enable WPF in the .csproj project file:
 
 The UI is laid out using a series of docked panels, as shown in the following figure.
 
-<img width="712" height="533" alt="image" src="https://github.com/user-attachments/assets/127c06e3-3fa1-4e67-8aa0-e635dc16a7ec" />
+<img width="712" height="487" alt="image" src="https://github.com/user-attachments/assets/e08d8c15-9b48-47df-a467-590229055d36" />
 
 *Figure 3 - Using panels to layout the user interface.*
 
